@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gameBoard.appendChild(foodElement);
 
     // draw snake
+    console.log("draw snake ")
     snake.map((snakePart) =>
       gameBoard.appendChild(drawDiv(snakePart.x, snakePart.y, "snake"))
     );
@@ -58,16 +59,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
    // check whether snake crosses wall or not (check for game over)
    function isGameOver(){
-    console.log('before is game over snake ',snake,snake[snake.length-1].x)
+    // console.log('before is game over snake ',snake,snake[snake.length-1].x)
+    console.log('is game over snake ',snake)
+    console.log(
+        (snake.length==0) , (snake[0].x<=0) , (snake[snake.length-1].x>=580) ,
+    (snake[0].y<=0) , (snake[snake.length-1].y>=580) 
+    )
     if((snake.length==0) || (snake[0].x<=0)|| (snake[snake.length-1].x>=580)
         || (snake[0].y<=0) || (snake[snake.length-1].y>=580) 
         ){
         // game over
-        console.log('is game over snake ',snake)
-        console.log(
-            (snake.length==0) , (snake[0].x<=0) , (snake[snake.length-1].x>=580) ,
-        (snake[0].y<=0) , (snake[snake.length-1].y>=580) 
-        )
+       
         return true
     }   
 }
@@ -92,26 +94,24 @@ document.addEventListener("DOMContentLoaded", () => {
             x:snake[0].x-20 ,
             y:snake[0].y
         })
+        // show updated score
+        drawScoreBoard();
         // move the food
         moveFood()
     }
-    drawScoreBoard();
+   
     drawFoodAndSnake();
    
      // check whether snake crosses wall or not (check for game over) 
     
     if(isGameOver()){
+      setTimeout(()=>{
         alert(`Game Over Score =${score}`)
         document.location.reload()
         return 
+      },10)
+        
      }
-    //  console.log('snake',snake)
-    
-
-
-    
-    
-    
   });
   // game loop
   function gameLoop() {
