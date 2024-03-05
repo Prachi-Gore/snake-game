@@ -69,19 +69,17 @@ function updateSnake(){
 }
  // check for game over
   function isGameOver() {
-    // check snake body hit itself
-    for(let i=1;i<snake.length;i++){
-      if(snake[0].x==snake[i].x && snake[0].y==snake[i].y) return true
-    }
+    // // check snake body hit itself
+    // for(let i=1;i<snake.length;i++){
+    //   if(snake[0].x===snake[i].x && snake[0].y===snake[i].y){
+    //     console.log('over')
+    //     return true}
+    // }
     console.log("snake",snake)
     const isHittingRightWall=snake[0].x >= 580;
     const isHittingLeftWall=snake[0].x <= 0;
     const isHittingBottomWall=snake[0].y >= 580;
     const isHittingTopWall=snake[0].y <= 0;
-    console.log(
-     isHittingLeftWall, isHittingRightWall,
-      isHittingTopWall, isHittingBottomWall
-    )
     if (isHittingLeftWall || isHittingRightWall
       || isHittingTopWall || isHittingBottomWall
     ) {
@@ -104,14 +102,17 @@ function updateSnake(){
     if (keypress == RIGHT_KEY && !isGoingLeft) { 
       dy=0;dx=cellSize
     }
-    if (keypress == LEFT_KEY && !isGoingRight) {
+   else if (keypress == LEFT_KEY && !isGoingRight) {
       dy=0;dx=-cellSize
     }
-    if (keypress == UP_KEY && !isGoingDown) {
+   else if (keypress == UP_KEY && !isGoingDown) {
       dy=-cellSize;dx=0
     }
-    if (keypress == DOWN_KEY && !isGoingUp) {
+   else if (keypress == DOWN_KEY && !isGoingUp) {
       dy=cellSize;dx=0
+    }
+    else{
+      return
     }
     updateSnake()
   }
